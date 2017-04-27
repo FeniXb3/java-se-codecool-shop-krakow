@@ -15,11 +15,14 @@ import java.util.List;
 import java.util.Map;
 
 public class ProductController {
+    private final ProductDao dao;
     private ProductListView listView = new ProductListView();
 
+    public ProductController(ProductDao dao) {
+        this.dao = dao;
+    }
+
     public void list() {
-        //TODO: create DAO that loads data from db
-        ProductDao dao = new ProductDaoHardcoded();
         List<Product> products = dao.getAll();
 
         listView.setModel(products);
