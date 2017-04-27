@@ -2,6 +2,7 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.ProductDaoHardcoded;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -17,28 +18,9 @@ public class ProductController {
     private ProductListView listView = new ProductListView();
 
     public void list() {
-        //TODO: get products from DAO
-        List<Product> products = new ArrayList<>();
-        products.add(new Product("First",
-                1.0f,
-                "PLN",
-                "First description",
-                new ProductCategory("Category",
-                        "Department",
-                        "Category description"
-                ),
-                new Supplier("First Supplier", "Description")
-        ));
-        products.add(new Product("Second",
-                1.0f,
-                "PLN",
-                "Second description",
-                new ProductCategory("Another Category",
-                        "Department",
-                        "Category description"
-                ),
-                new Supplier("Second Supplier", "Description")
-        ));
+        //TODO: create DAO that loads data from db
+        ProductDao dao = new ProductDaoHardcoded();
+        List<Product> products = dao.getAll();
 
         listView.setModel(products);
         listView.render();
