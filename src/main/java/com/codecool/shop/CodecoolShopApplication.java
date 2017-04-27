@@ -11,8 +11,11 @@ public class CodecoolShopApplication {
 
         //TODO: create and use DAO that loads data from db
         ProductDao productDao = new ProductDaoHardcoded();
+        int categoryId = 1;
 
         ProductController productController = new ProductController(productDao);
         productController.list();
+
+        productController.listByCategory(categoryId);
     }
 }

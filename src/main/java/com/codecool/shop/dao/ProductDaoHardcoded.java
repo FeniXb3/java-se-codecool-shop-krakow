@@ -9,6 +9,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDaoHardcoded implements ProductDao {
+
+    private List<Product> products;
+
+    public ProductDaoHardcoded() {
+        products = new ArrayList<>();
+        ProductCategory first = new ProductCategory("Category",
+                "Department",
+                "Category description"
+        );
+        first.setId(1);
+        ProductCategory second = new ProductCategory("Another Category",
+                "Department",
+                "Category description"
+        );
+        second.setId(2);
+
+        products.add(new Product("First",
+                1.0f,
+                "PLN",
+                "First description",
+                first,
+                new Supplier("First Supplier", "Description")
+        ));
+        products.add(new Product("Second",
+                1.0f,
+                "PLN",
+                "Second description",
+                second,
+                new Supplier("Second Supplier", "Description")
+        ));
+    }
+
     @Override
     public void add(Product product) {
         throw new NotImplementedException();
@@ -26,27 +58,6 @@ public class ProductDaoHardcoded implements ProductDao {
 
     @Override
     public List<Product> getAll() {
-        List<Product> products = new ArrayList<>();
-        products.add(new Product("First",
-                1.0f,
-                "PLN",
-                "First description",
-                new ProductCategory("Category",
-                        "Department",
-                        "Category description"
-                ),
-                new Supplier("First Supplier", "Description")
-        ));
-        products.add(new Product("Second",
-                1.0f,
-                "PLN",
-                "Second description",
-                new ProductCategory("Another Category",
-                        "Department",
-                        "Category description"
-                ),
-                new Supplier("Second Supplier", "Description")
-        ));
         return products;
     }
 
@@ -57,6 +68,13 @@ public class ProductDaoHardcoded implements ProductDao {
 
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
-        throw new NotImplementedException();
+        List<Product> filteredProducts = new ArrayList<>();
+        for(Product product:products) {
+            if(product.getProductCategory().getId() == productCategory.getId()) {
+                filteredProducts.add(product);
+            }
+        }
+
+        return filteredProducts;
     }
 }
