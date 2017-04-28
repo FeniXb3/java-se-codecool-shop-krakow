@@ -12,5 +12,6 @@ public class ProductListView {
     }
 
     public void render() {
+        System.out.println(model);
     }
 }
